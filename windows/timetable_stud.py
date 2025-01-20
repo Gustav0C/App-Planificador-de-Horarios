@@ -2,22 +2,26 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+#IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
+import customtkinter as ctk
+#ASIGNANDO VALORES GLOBALES AL CTK
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
 
 days = 5
-periods = 6
+periods = 8
 recess_break_aft = 3 # recess after 3rd Period
 section = None
 butt_grid = []
 
-period_names = list(map(lambda x: 'Period ' + str(x), range(1, 6+1)))
-day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday']
+period_names =['7:45-8:30', '8:30-9:15', '9:15-10:00', '10:00-10:45', '10:45-11:30','11:30-12:15','12:15-1:00','1:00-1:45']
+day_names = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
+
 def select_sec():
     global section
     section = str(combo1.get())
     print(section)
     update_table(section)
-
-
 
 def update_table(sec):
     for i in range(days):
@@ -46,8 +50,6 @@ def update_table(sec):
                 butt_grid[i][j]['fg'] = 'black'
                 butt_grid[i][j]['text'] = "No Class"
                 butt_grid[i][j].update()
-
-
 
 def process_button(d, p, sec):
     details = tk.Tk()
@@ -99,28 +101,28 @@ def process_button(d, p, sec):
 
     details.mainloop()
 
-
-
 def student_tt_frame(tt, sec):
     title_lab = tk.Label(
         tt,
-        text='T  I  M  E  T  A  B  L  E',
+        text='H O R A R I O',
         font=('Arial', 20, 'bold'),
-        pady=5
+        pady=5,
+        bg="SkyBlue2"
     )
     title_lab.pack()
 
-    legend_f = tk.Frame(tt)
+    legend_f = tk.Frame(tt,bg="SkyBlue2")
     legend_f.pack(pady=15)
     tk.Label(
         legend_f,
-        text='Legend: ',
-        font=('Arial', 10, 'italic')
+        text='Leyenda: ',
+        font=('Arial', 10, 'italic'),
+        bg="SkyBlue2"
     ).pack(side=tk.LEFT)
 
     tk.Label(
         legend_f,
-        text='Theory Classes',
+        text='Clases Teoricas',
         bg='green',
         fg='white',
         relief='raised',
@@ -130,7 +132,7 @@ def student_tt_frame(tt, sec):
 
     tk.Label(
         legend_f,
-        text='Practical Classes',
+        text='Clases Practicas',
         bg='blue',
         fg='white',
         relief='raised',
@@ -142,38 +144,29 @@ def student_tt_frame(tt, sec):
     global section
     section = sec
 
-    table = tk.Frame(tt)
+    table = tk.Frame(tt, bg="SkyBlue2")
     table.pack()
 
-    first_half = tk.Frame(table)
+    first_half = tk.Frame(table, bg="SkyBlue2")
     first_half.pack(side='left')
 
-    recess_frame = tk.Frame(table)
+    recess_frame = tk.Frame(table,bg="SkyBlue2")
     recess_frame.pack(side='left')
 
-    second_half = tk.Frame(table)
+    second_half = tk.Frame(table,bg="SkyBlue2")
     second_half.pack(side='left')
 
-    recess = tk.Label(
-        recess_frame,
-        text='R\n\nE\n\nC\n\nE\n\nS\n\nS',
-        font=('Arial', 18, 'italic'),
-        width=3,
-        relief='sunken'
-    )
-    recess.pack()
-
     for i in range(days):
-        b = tk.Label(
+        b = ctk.CTkLabel(
             first_half,
             text=day_names[i],
-            font=('Arial', 12, 'bold'),
-            width=9,
+            font=('Arial', 16, 'bold'),
+            width=12,
             height=2,
-            bd=5,
-            relief='raised'
+            bg_color="SkyBlue2",
+            wraplength=400,
         )
-        b.grid(row=i+1, column=0)
+        b.grid(row=i+1, column=0,padx=(0,10))
 
     for i in range(periods):
         if i < recess_break_aft:
@@ -183,13 +176,12 @@ def student_tt_frame(tt, sec):
             b = tk.Label(second_half)
             b.grid(row=0, column=i)
 
-        b.config(
+        b.configure(
             text=period_names[i],
-            font=('Arial', 12, 'bold'),
-            width=9,
-            height=1,
-            bd=5,
-            relief='raised'
+            font=('Arial', 14, 'bold'),
+            width=10,
+            height=2,
+            bg="SkyBlue2"
         )
 
     for i in range(days):
@@ -203,7 +195,7 @@ def student_tt_frame(tt, sec):
                 bb.grid(row=i+1, column=j)
 
             bb.config(
-                text='Hello World!',
+                text='None!',
                 font=('Arial', 10),
                 width=13,
                 height=3,
@@ -214,7 +206,6 @@ def student_tt_frame(tt, sec):
                 command=lambda x=i, y=j, z=sec: process_button(x, y, z)
             )
             b.append(bb)
-
         butt_grid.append(b)
         # print(b)
         b = []
@@ -222,26 +213,25 @@ def student_tt_frame(tt, sec):
     print(butt_grid[0][1], butt_grid[1][1])
     update_table(sec)
 
-
-
 conn = sqlite3.connect(r'files/timetable.db')
 if __name__ == "__main__":
     
     # connecting database
-
     tt = tk.Tk()
-    tt.title('Student Timetable')
-
-
+    tt.title('Horario para Estudiantes')
+    tt.geometry('1200x600')
+    tt.iconbitmap("files/images/favicon.ico")
+    tt.config(bg="SkyBlue2")
     student_tt_frame(tt, section)
 
-    sec_select_f = tk.Frame(tt, pady=15)
+    sec_select_f = tk.Frame(tt, pady=15,bg="SkyBlue2")
     sec_select_f.pack()
 
     tk.Label(
         sec_select_f,
         text='Select section:  ',
-        font=('Arial', 12, 'bold')
+        font=('Arial', 12, 'bold'),
+        bg="SkyBlue2"
     ).pack(side=tk.LEFT)
 
     cursor = conn.execute("SELECT DISTINCT SECTION FROM STUDENT")

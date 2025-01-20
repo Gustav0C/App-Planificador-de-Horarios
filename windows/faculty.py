@@ -3,9 +3,13 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sys
+#IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
+import customtkinter as ctk
+#ASIGNANDO VALORES GLOBALES AL CTK
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
 
 fid = passw = conf_passw = name = ini = email = subcode1 = subcode2 = None
-
 
 '''
     LIST OF FUNCTIONS USED FOR VARIOUS FUNCTIONS THROUGH TKinter INTERFACE
@@ -125,7 +129,6 @@ def update_data():
         messagebox.showerror("Bad Select", "¡Primero seleccione una aula de la lista!")
         return
 
-
 # remove selected data from databse and treeview
 def remove_data():
     if len(tree.selection()) < 1:
@@ -138,21 +141,14 @@ def remove_data():
         tree.delete(i)
         update_treeview()
 
-
 # toggles between show/hide password
 def show_passw():
-    if passw_entry['show'] == "●":
-        passw_entry['show'] = ""
-        B1_show['text'] = '●'
-        B1_show.update()
-    elif passw_entry['show'] == "":
-        passw_entry['show'] = "●"
-        B1_show['text'] = '○'
-        B1_show.update()
-    passw_entry.update()
-
-
-
+    if passw_entry.cget("show") == "●":
+        passw_entry.configure(show="")
+        B1_show.configure(text="●")
+    else:
+        passw_entry.configure(show="●")
+        B1_show.configure(text="○")
 
 # main
 if __name__ == "__main__":  
@@ -174,7 +170,6 @@ if __name__ == "__main__":
     SUBCODE1 CHAR(10) NOT NULL,\
     SUBCODE2 CHAR(10)    )')
 
-
     '''
         TKinter WINDOW SETUP WITH WIDGETS
             * Label(1-11)
@@ -188,40 +183,45 @@ if __name__ == "__main__":
     subtk = tk.Tk()
     subtk.geometry('1000x550')
     subtk.title('Add/Update Faculties')
+    subtk.config(bg='SkyBlue2')
 
     # Label1
     tk.Label(
         subtk,
         text='Lista de Profesores',
-        font=('Arial', 20, 'bold')
+        font=('Arial', 20, 'bold'),
+        bg='SkyBlue2'
     ).place(x=600, y=50)
 
     # Label2
     tk.Label(
         subtk,
         text='Agregar/Actualizar Profesor',
-        font=('Arial', 20, 'bold')
+        font=('Arial', 20, 'bold'),
+        bg='SkyBlue2'
     ).place(x=90, y=50)
 
     # Label3
     tk.Label(
         subtk,
         text='¡Agregue información en el siguiente mensaje!',
-        font=('Arial', 10, 'italic')
+        font=('Arial', 10, 'italic'),
+        bg='SkyBlue2'
     ).place(x=100, y=85)
 
     # Label4
     tk.Label(
         subtk,
         text='Id:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=130)
 
     # Entry1
-    fid_entry = tk.Entry(
+    fid_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=20
+        width=80
     )
     fid_entry.place(x=260, y=130)
 
@@ -229,39 +229,44 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Contraseña:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=170)
 
-    # Entry2
-    passw_entry = tk.Entry(
+    # Entrada de contraseña
+    passw_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=20,
+        width=200,  # Ajusta el ancho según `customtkinter`
         show="●"
     )
     passw_entry.place(x=260, y=170)
 
-    B1_show = tk.Button(
+    # Botón para mostrar/ocultar contraseña
+    B1_show = ctk.CTkButton(
         subtk,
-        text='○',
+        text="○",
         font=('Arial', 9, 'bold'),
-        command=show_passw
+        command=show_passw,
+        width=25,  # Ancho del botón
+        height=25,  # Alto del botón
+        corner_radius=10
     )
-    B1_show.place(x=460,y=170)
+    B1_show.place(x=472, y=172)
 
     # Label6
     tk.Label(
         subtk,
         text='Confirmar contraseña:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=210)
 
     # Entry3
-    conf_passw_entry = tk.Entry(
+    conf_passw_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=20,
-        show="●"
+        width=200
     )
     conf_passw_entry.place(x=260, y=210)
 
@@ -269,14 +274,15 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Nombre del Profesor:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=250)
 
     # Entry4
-    name_entry = tk.Entry(
+    name_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=25,
+        width=230
     )
     name_entry.place(x=260, y=250)
 
@@ -284,14 +290,15 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Inicial:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=290)
 
     # Entry5
-    ini_entry = tk.Entry(
+    ini_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=5,
+        width=40
     )
     ini_entry.place(x=260, y=290)
 
@@ -299,14 +306,15 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Correo:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=330)   
 
     # Entry6
-    email_entry = tk.Entry(
+    email_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=25,
+        width=180
     )
     email_entry.place(x=260, y=330)
 
@@ -319,46 +327,50 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Curso 1:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=370)
 
     # ComboBox1
-    combo1 = ttk.Combobox(
+    combo1 = ctk.CTkComboBox(
         subtk,
         values=subcode_li,
     )
     combo1.place(x=260, y=370)
-    combo1.current(0)
+    combo1.set(subcode_li[0])
 
     # Label11
     tk.Label(
         subtk,
         text='Curso 2:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=410)
 
     # ComboBox2
-    combo2 = ttk.Combobox(
+    combo2 = ctk.CTkComboBox(
         subtk,
         values=subcode_li,
     )
     combo2.place(x=260, y=410)
-    combo2.current(0)
+    combo2.set(subcode_li[0])
 
     # Button1
-    B1 = tk.Button(
+    B1 = ctk.CTkButton(
         subtk,
         text='Agregar Profesor',
         font=('Arial', 12),
+        text_color='black',
         command=parse_data
     )
     B1.place(x=150,y=465)
 
     # Button2
-    B2 = tk.Button(
+    B2 = ctk.CTkButton(
         subtk,
         text='Actualizar Profesor',
         font=('Arial', 12),
+        text_color='black',
         command=update_data
     )
     B2.place(x=410,y=465)
@@ -369,10 +381,11 @@ if __name__ == "__main__":
     update_treeview()
 
     # Button3
-    B3 = tk.Button(
+    B3 = ctk.CTkButton(
         subtk,
         text='Eliminar facultades',
         font=('Arial', 12),
+        text_color='black',
         command=remove_data
     )
     B3.place(x=650,y=465)

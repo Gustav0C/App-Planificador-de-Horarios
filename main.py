@@ -11,7 +11,6 @@ from PIL import Image, ImageTk
 
 #IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
 import customtkinter as ctk
-
 #ASIGNANDO VALORES GLOBALES AL CTK
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
@@ -23,16 +22,21 @@ def challenge():
         cursor = conn.execute(f"SELECT PASSW, SECTION, NAME, ROLL FROM STUDENT WHERE SID='{id_entry.get()}'")
         cursor = list(cursor)
         if len(cursor) == 0:
-            messagebox.showwarning('Bad id', '¡NOMBRE DE USUARIO INCORRECTO!')
+            messagebox.showwarning('Bad id', '¡Nombre de Usuario Incorrecto!')
         elif passw_entry.get() != cursor[0][0]:
-            messagebox.showerror('Bad pass', '¡CONTRASEÑA INCORRECTA!')
+            messagebox.showerror('Bad pass', '¡Contraseña Incorrecta!')
         else:
-            nw = ctk.CTk()
-            ctk.CTkLabel(
+            nw = tk.Tk()
+            nw.geometry('1200x600')
+            nw.title('Horario')
+            nw.iconbitmap("files/images/favicon.ico")
+            nw.config(bg="SkyBlue2")
+            tk.Label(
                 nw,
                 text=f'{cursor[0][2]}\tSection: {cursor[0][1]}\tRoll No.: {cursor[0][3]}',
                 font=('Arial', 12, 'italic'),
-            ).pack()
+                bg="SkyBlue2"
+            ).pack(pady=(10, 0))
             m.destroy()
             timetable_stud.student_tt_frame(nw, cursor[0][1])
             nw.mainloop()
@@ -70,12 +74,11 @@ m.title('App v1.0')
 m.iconbitmap("files/images/favicon.ico")
 m.config(bg="SkyBlue2")
 
-tk.Label(
+ctk.CTkLabel(
     m,
     text='Planificador de Horarios',
     font=('Arial', 20, 'bold'),
-    wrap=400,
-    background="SkyBlue2"
+    fg_color="SkyBlue2"
 ).pack(pady=20)
 
 ctk.CTkLabel(
@@ -122,7 +125,8 @@ pass_entry_f.pack()
 passw_entry = ctk.CTkEntry(
     pass_entry_f,
     show="●",
-    corner_radius=10
+    corner_radius=10,
+    bg_color="SkyBlue2"
 )
 passw_entry.pack(side=tk.LEFT,padx=(39, 10))
 

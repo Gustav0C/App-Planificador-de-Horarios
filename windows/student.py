@@ -6,7 +6,6 @@ import sys
 
 fid = passw = conf_passw = name = roll = section = None
 
-
 '''
     LIST OF FUNCTIONS USED FOR VARIOUS FUNCTIONS THROUGH TKinter INTERFACE
         * create_treeview()
@@ -32,7 +31,6 @@ def create_treeview():
     tree.heading('#4', text="Section")
     tree['height'] = 12
 
-
 # update treeview (call this function after each update)
 def update_treeview():
     for row in tree.get_children():
@@ -45,7 +43,6 @@ def update_treeview():
             values=(row[0], row[1], row[2], row[3])
         )
     tree.place(x=530, y=100)
-
 
 # Parse and store data into database and treeview upon clcicking of the add button
 def parse_data():

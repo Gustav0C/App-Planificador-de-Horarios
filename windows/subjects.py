@@ -3,6 +3,11 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sys
+#IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
+import customtkinter as ctk
+#ASIGNANDO VALORES GLOBALES AL CTK
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
 
 # inputs in this window
 subcode = subname = subtype = None
@@ -145,40 +150,45 @@ if __name__ == "__main__":
     subtk = tk.Tk()
     subtk.geometry('1000x450')
     subtk.title('Add/Update Subjects')
+    subtk.config(bg='SkyBlue2')
 
     # Label1
     tk.Label(
         subtk,
         text='List of Subjects',
-        font=('Arial', 20, 'bold')
+        font=('Arial', 20, 'bold'),
+        bg='SkyBlue2'
     ).place(x=600, y=50)
 
     # Label2
     tk.Label(
         subtk,
         text='Add/Update Subjects',
-        font=('Arial', 20, 'bold')
+        font=('Arial', 20, 'bold'),
+        bg='SkyBlue2'
     ).place(x=100, y=50)
 
     # Label3
     tk.Label(
         subtk,
         text='Add information in the following prompt!',
-        font=('Arial', 10, 'italic')
+        font=('Arial', 10, 'italic'),
+        bg='SkyBlue2'
     ).place(x=100, y=85)
 
     # Label4
     tk.Label(
         subtk,
         text='Subject code:',
-        font=('Arial', 15)
+        font=('Arial', 15),
+        bg='SkyBlue2'
     ).place(x=100, y=150)
 
     # Entry1
-    subcode_entry = tk.Entry(
+    subcode_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 15),
-        width=11
+        width=120
     )
     subcode_entry.place(x=270, y=150)
     
@@ -186,16 +196,19 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Subject Name:',
+        bg='SkyBlue2',
         font=('Arial', 15)
     ).place(x=100, y=200)
 
-    # Text
-    subname_entry = tk.Text(
-        subtk,
-        font=('Arial', 10),
-        width=17,
-        height=3,
-        wrap=tk.WORD
+    # ENTRY 2
+    subname_entry = ctk.CTkTextbox(
+        master=subtk,
+        font=('Arial', 14),
+        border_color='grey',
+        border_width=2,
+        width=200,  # Ancho en píxeles
+        height=60,  # Alto en píxeles
+        wrap="word"  # Equivalente a tk.WORD
     )
     subname_entry.place(x=270, y=200)
 
@@ -203,17 +216,18 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Subject Type:',
-        font=('Arial', 15)
+        font=('Arial', 15),
+        bg='SkyBlue2'
     ).place(x=100, y=270)
 
     # RadioButton variable to store RadioButton Status
     radio_var = tk.StringVar()
 
     # RadioButton1
-    R1 = tk.Radiobutton(
+    R1 = ctk.CTkRadioButton(
         subtk,
         text='Theory',
-        font=('Arial', 12),
+        font=('Arial', 14),
         variable=radio_var,
         value="T"
     )
@@ -221,10 +235,10 @@ if __name__ == "__main__":
     R1.select()
 
     # RadioButton2
-    R2 = tk.Radiobutton(
+    R2 = ctk.CTkRadioButton(
         subtk,
         text='Practical',
-        font=('Arial', 12),
+        font=('Arial', 14),
         variable=radio_var,
         value="P"
     )
@@ -232,19 +246,21 @@ if __name__ == "__main__":
     R2.select()
 
     # Button1
-    B1 = tk.Button(
+    B1 = ctk.CTkButton(
         subtk,
         text='Add Subject',
         font=('Arial', 12),
+        text_color='black',
         command=parse_data
     )
     B1.place(x=150,y=350)
 
     # Button2
-    B2 = tk.Button(
+    B2 = ctk.CTkButton(
         subtk,
         text='Update Subject',
         font=('Arial', 12),
+        text_color='black',
         command=update_data
     )
     B2.place(x=410,y=350)
@@ -255,10 +271,11 @@ if __name__ == "__main__":
     update_treeview()
 
     # Button3
-    B3 = tk.Button(
+    B3 = ctk.CTkButton(
         subtk,
         text='Delete Subject(s)',
         font=('Arial', 12),
+        text_color='black',
         command=remove_data
     )
     B3.place(x=650,y=350)

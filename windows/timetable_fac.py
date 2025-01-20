@@ -2,26 +2,26 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+#IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
+import customtkinter as ctk
+#ASIGNANDO VALORES GLOBALES AL CTK
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
 
 days = 5
-periods = 6
+periods = 8
 recess_break_aft = 3 # recess after 3rd Period
 fini = None
 butt_grid = []
 
-
-period_names = list(map(lambda x: 'Period ' + str(x), range(1, 6+1)))
+period_names =['7:45-8:30', '8:30-9:15', '9:15-10:00', '10:00-10:45', '10:45-11:30','11:30-12:15','12:15-1:00','1:00-1:45']
 day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday']
-
-
 
 def select_fac():
     global fini
     fini = str(combo1.get())
     print(fini)
     update_table(fini)
-
-
 
 def update_table(fini):
     for i in range(days):
@@ -51,8 +51,6 @@ def update_table(fini):
                 butt_grid[i][j]['fg'] = 'black'
                 butt_grid[i][j]['text'] = "No Class"
                 butt_grid[i][j].update()
-
-
 
 def process_button(d, p):
     print(d, p, fini)
@@ -98,8 +96,6 @@ def process_button(d, p):
     ).pack(pady=10)
 
     details.mainloop()
-
-
 
 def fac_tt_frame(tt, f):
     title_lab = tk.Label(
@@ -154,24 +150,13 @@ def fac_tt_frame(tt, f):
     second_half = tk.Frame(table)
     second_half.pack(side='left')
 
-    recess = tk.Label(
-        recess_frame,
-        text='R\n\nE\n\nC\n\nE\n\nS\n\nS',
-        font=('Arial', 18, 'italic'),
-        width=3,
-        relief='sunken'
-    )
-    recess.pack()
-
     for i in range(days):
-        b = tk.Label(
+        b = ctk.CTkLabel(
             first_half,
             text=day_names[i],
             font=('Arial', 12, 'bold'),
-            width=9,
+            width=12,
             height=2,
-            bd=5,
-            relief='raised'
         )
         b.grid(row=i+1, column=0)
 
@@ -187,9 +172,7 @@ def fac_tt_frame(tt, f):
             text=period_names[i],
             font=('Arial', 12, 'bold'),
             width=9,
-            height=1,
-            bd=5,
-            relief='raised'
+            height=2,
         )
 
     for i in range(days):
@@ -222,18 +205,16 @@ def fac_tt_frame(tt, f):
     print(butt_grid[0][1], butt_grid[1][1])
     update_table(fini)
 
-
-
 conn = sqlite3.connect(r'files/timetable.db')
 if __name__ == "__main__":
     
     # connecting database
-
     tt = tk.Tk()
-    tt.title('Faculty Timetable')
+    tt.title('Horario para Profesores')
+    tt.geometry('1200x600')
+    tt.iconbitmap("files/images/favicon.ico")
 
     fac_tt_frame(tt, fini)
-
     fac_select_f = tk.Frame(tt, pady=15)
     fac_select_f.pack()
 
@@ -262,6 +243,5 @@ if __name__ == "__main__":
     )
     b.pack(side=tk.LEFT, padx=10)
     b.invoke()
-
 
     tt.mainloop()

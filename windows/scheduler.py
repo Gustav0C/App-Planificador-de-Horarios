@@ -2,17 +2,21 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+#IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
+import customtkinter as ctk
+
+#ASIGNANDO VALORES GLOBALES AL CTK
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
 
 days = 5
-periods = 6
+periods = 8
 recess_break_aft = 3 # recess after 3rd Period
 section = None
 butt_grid = []
 
-
-period_names = list(map(lambda x: 'Period ' + str(x), range(1, 6+1)))
+period_names =['7:45-8:30', '8:30-9:15', '9:15-10:00', '10:00-10:45', '10:45-11:30','11:30-12:15','12:15-1:00','1:00-1:45']
 day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday']
-
 
 def update_p(d, p, tree, parent):
     # print(section, d, p, str(sub.get()))
@@ -43,8 +47,6 @@ def update_p(d, p, tree, parent):
 
     parent.destroy()
 
-
-
 def process_button(d, p):
     print(d, p)
     add_p = tk.Tk()
@@ -59,19 +61,22 @@ def process_button(d, p):
     tk.Label(
         add_p,
         text='Select Subject',
-        font=('Arial', 12, 'bold')
+        font=('Arial', 12, 'bold'),
+        bg='SkyBlue2'
     ).pack()
 
     tk.Label(
         add_p,
         text=f'Day: {day_names[d]}',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).pack()
 
     tk.Label(
         add_p,
         text=f'Period: {p+1}',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).pack()
 
     tree = ttk.Treeview(add_p)
@@ -105,13 +110,11 @@ def process_button(d, p):
 
     add_p.mainloop()
 
-
 def select_sec():
     global section
     section = str(combo1.get())
     print(section)
     update_table()
-
 
 def update_table():
     for i in range(days):
@@ -128,8 +131,7 @@ def update_table():
                 butt_grid[i][j]['text'] = "No Class"
                 butt_grid[i][j].update()
             
-
-# connecting database
+#CONECTANDO A LA BASE DE DATOS
 conn = sqlite3.connect(r'files/timetable.db')
 
 # creating Tabe in the database
@@ -142,10 +144,12 @@ SECTION CHAR(5) NOT NULL,\
 FINI CHAR(10) NOT NULL)')
 # DAYID AND PERIODID ARE ZERO INDEXED
 
-
+#VENTANA PRINCIPAL
 tt = tk.Tk()
-
-tt.title('Scheduler')
+tt.geometry('1200x600')
+tt.title('Horario General')
+tt.iconbitmap("files/images/favicon.ico")
+tt.config(bg='SkyBlue2')
 
 title_lab = tk.Label(
     tt,
@@ -154,7 +158,6 @@ title_lab = tk.Label(
     pady=5
 )
 title_lab.pack(pady=(20,10))
-
 
 table = tk.Frame(tt)
 table.pack()
@@ -169,14 +172,14 @@ second_half = tk.Frame(table)
 second_half.pack(side='left')
 
 for i in range(days):
-    b = tk.Label(
+    b = ctk.CTkLabel(
         first_half,
         text=day_names[i],
-        font=('Arial', 12, 'bold'),
+        font=('Arial', 16, 'bold'),
         width=12,
         height=2,
-        bd=5,
-        relief='raised'
+        bg_color="SkyBlue2",
+        wraplength=400,
     )
     b.grid(row=i+1, column=0,padx=(0,10))
 
@@ -191,10 +194,9 @@ for i in range(periods):
     b.config(
         text=period_names[i],
         font=('Arial', 12, 'bold'),
-        width=9,
-        height=1,
-        bd=5,
-        relief='raised'
+        width=10,
+        height=2,
+        bg="SkyBlue2"
     )
     b.grid(pady=(0,10))
 
@@ -224,13 +226,14 @@ for i in range(days):
     butt_grid.append(b)
     # print(b)
     b = []
-sec_select_f = tk.Frame(tt, pady=15)
+sec_select_f = tk.Frame(tt, pady=15,bg="SkyBlue2")
 sec_select_f.pack()
 
 tk.Label(
     sec_select_f,
     text='Seleccionar Sección:  ',
-    font=('Arial', 12, 'bold')
+    font=('Arial', 12, 'bold'),
+    bg="SkyBlue2"
 ).pack(side=tk.LEFT)
 
 cursor = conn.execute("SELECT DISTINCT SECTION FROM STUDENT")
@@ -254,9 +257,7 @@ b = tk.Button(
 b.pack(side=tk.LEFT, padx=10)
 b.invoke()
 
-
 print(butt_grid[0][1], butt_grid[1][1])
 update_table()
-
 
 tt.mainloop()

@@ -10,6 +10,10 @@ def run_sch(): os.system('pythonw windows\\scheduler.py')
 def run_tt_s(): os.system('pythonw windows\\timetable_stud.py')
 def run_tt_f(): os.system('pythonw windows\\timetable_fac.py')
 
+#ASIGNANDO VALORES GLOBALES AL CTK
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
+
 ad = tk.Tk()
 ad.geometry('500x430')
 ad.title('Administrador')
