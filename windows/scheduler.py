@@ -61,22 +61,19 @@ def process_button(d, p):
     tk.Label(
         add_p,
         text='Select Subject',
-        font=('Arial', 12, 'bold'),
-        bg='SkyBlue2'
+        font=('Arial', 12, 'bold')
     ).pack()
 
     tk.Label(
         add_p,
         text=f'Day: {day_names[d]}',
-        font=('Arial', 12),
-        bg='SkyBlue2'
+        font=('Arial', 12)
     ).pack()
 
     tk.Label(
         add_p,
         text=f'Period: {p+1}',
-        font=('Arial', 12),
-        bg='SkyBlue2'
+        font=('Arial', 12)
     ).pack()
 
     tree = ttk.Treeview(add_p)
@@ -155,20 +152,21 @@ title_lab = tk.Label(
     tt,
     text='H O R A R I O',
     font=('Arial', 20, 'bold'),
-    pady=5
+    pady=5,
+    bg='SkyBlue2'
 )
 title_lab.pack(pady=(20,10))
 
-table = tk.Frame(tt)
+table = tk.Frame(tt, bg='Skyblue2')
 table.pack()
 
-first_half = tk.Frame(table)
+first_half = tk.Frame(table, bg='Skyblue2')
 first_half.pack(side='left')
 
-recess_frame = tk.Frame(table)
+recess_frame = tk.Frame(table, bg='Skyblue2')
 recess_frame.pack(side='left')
 
-second_half = tk.Frame(table)
+second_half = tk.Frame(table, bg='Skyblue2')
 second_half.pack(side='left')
 
 for i in range(days):
@@ -193,7 +191,7 @@ for i in range(periods):
 
     b.config(
         text=period_names[i],
-        font=('Arial', 12, 'bold'),
+        font=('Arial', 14, 'bold'),
         width=10,
         height=2,
         bg="SkyBlue2"

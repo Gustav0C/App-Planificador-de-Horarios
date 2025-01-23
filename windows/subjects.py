@@ -23,15 +23,17 @@ subcode = subname = subtype = None
 
 # create treeview (call this function once)
 def create_treeview():
-    tree['columns'] = ('one', 'two', 'three')
+    tree['columns'] = ('one', 'two', 'three','four')
     tree.column("#0", width=0, stretch=tk.NO)
     tree.column("one", width=70, stretch=tk.NO)
     tree.column("two", width=300, stretch=tk.NO)
     tree.column("three", width=60, stretch=tk.NO)
+    tree.column("four", width=70, stretch=tk.NO)
     tree.heading('#0', text="")
     tree.heading('one', text="Code")
     tree.heading('two', text="Name")
     tree.heading('three', text="Type")
+    tree.heading('four',text="Section")
 
 
 # update treeview (call this function after each update)
@@ -148,14 +150,14 @@ if __name__ == "__main__":
 
     # TKinter Window
     subtk = tk.Tk()
-    subtk.geometry('1000x450')
+    subtk.geometry('1100x550')
     subtk.title('Add/Update Subjects')
     subtk.config(bg='SkyBlue2')
 
     # Label1
     tk.Label(
         subtk,
-        text='List of Subjects',
+        text='Lista de Cursos',
         font=('Arial', 20, 'bold'),
         bg='SkyBlue2'
     ).place(x=600, y=50)
@@ -163,7 +165,7 @@ if __name__ == "__main__":
     # Label2
     tk.Label(
         subtk,
-        text='Add/Update Subjects',
+        text='Añadir/Actualizar Cursos',
         font=('Arial', 20, 'bold'),
         bg='SkyBlue2'
     ).place(x=100, y=50)
@@ -171,7 +173,7 @@ if __name__ == "__main__":
     # Label3
     tk.Label(
         subtk,
-        text='Add information in the following prompt!',
+        text='En este apartado puedes añadir o actualizar los cursos',
         font=('Arial', 10, 'italic'),
         bg='SkyBlue2'
     ).place(x=100, y=85)
@@ -179,7 +181,7 @@ if __name__ == "__main__":
     # Label4
     tk.Label(
         subtk,
-        text='Subject code:',
+        text='Curso ID:',
         font=('Arial', 15),
         bg='SkyBlue2'
     ).place(x=100, y=150)
@@ -195,7 +197,7 @@ if __name__ == "__main__":
     # Label5
     tk.Label(
         subtk,
-        text='Subject Name:',
+        text='Nombre de Curso:',
         bg='SkyBlue2',
         font=('Arial', 15)
     ).place(x=100, y=200)
@@ -215,7 +217,7 @@ if __name__ == "__main__":
     # Label6
     tk.Label(
         subtk,
-        text='Subject Type:',
+        text='Tipo de Curso:',
         font=('Arial', 15),
         bg='SkyBlue2'
     ).place(x=100, y=270)
@@ -226,7 +228,7 @@ if __name__ == "__main__":
     # RadioButton1
     R1 = ctk.CTkRadioButton(
         subtk,
-        text='Theory',
+        text='Teoria',
         font=('Arial', 14),
         variable=radio_var,
         value="T"
@@ -237,33 +239,97 @@ if __name__ == "__main__":
     # RadioButton2
     R2 = ctk.CTkRadioButton(
         subtk,
-        text='Practical',
+        text='Practica',
         font=('Arial', 14),
         variable=radio_var,
         value="P"
     )
     R2.place(x=270, y=300)
     R2.select()
+    # Label6
+    tk.Label(
+        subtk,
+        text='Sección:',
+        font=('Arial', 15),
+        bg='SkyBlue2'
+    ).place(x=100, y=340)
+
+    # Entry1
+    section_entry = ctk.CTkEntry(
+        subtk,
+        font=('Arial', 15),
+        width=120
+    )
+    section_entry.place(x=270, y=340)
+    # Recopilando datos de la hora de inicio del curso
+    tk.Label(
+        subtk,
+        text='Horario:',
+        font=('Arial', 15),
+        bg='SkyBlue2'
+    ).place(x=100, y=380)
+
+    # horas entry
+    i_horas_entry = ctk.CTkEntry(
+        subtk,
+        font=('Arial', 15),
+        width=40,
+        placeholder_text="HH"
+    )
+    i_horas_entry.place(x=270, y=380)
+    # minutos entry
+    i_minutos_entry = ctk.CTkEntry(
+        subtk,
+        font=('Arial', 15),
+        width=40,
+        placeholder_text="MM"
+    )
+    i_minutos_entry.place(x=320, y=380)
+
+    # Recopilando datos del fin de hora del curso
+    tk.Label(
+        subtk,
+        text='Fin de Hora:',
+        font=('Arial', 15),
+        bg='SkyBlue2'
+    ).place(x=100, y=420)
+
+    # horas entry
+    f_horas_entry = ctk.CTkEntry(
+        subtk,
+        font=('Arial', 15),
+        width=40,
+        placeholder_text="HH"
+    )
+    f_horas_entry.place(x=270, y=420)
+    # minutos entry
+    f_minutos_entry = ctk.CTkEntry(
+        subtk,
+        font=('Arial', 15),
+        width=40,
+        placeholder_text="MM"
+    )
+    f_minutos_entry.place(x=320, y=420)
 
     # Button1
     B1 = ctk.CTkButton(
         subtk,
-        text='Add Subject',
+        text='Añadir Curso',
         font=('Arial', 12),
         text_color='black',
         command=parse_data
     )
-    B1.place(x=150,y=350)
+    B1.place(x=150,y=470)
 
     # Button2
     B2 = ctk.CTkButton(
         subtk,
-        text='Update Subject',
+        text='Actualizar Curso',
         font=('Arial', 12),
         text_color='black',
         command=update_data
     )
-    B2.place(x=410,y=350)
+    B2.place(x=410,y=470)
 
     # Treeview1
     tree = ttk.Treeview(subtk)
@@ -273,12 +339,12 @@ if __name__ == "__main__":
     # Button3
     B3 = ctk.CTkButton(
         subtk,
-        text='Delete Subject(s)',
+        text='Eliminar Curso(s)',
         font=('Arial', 12),
         text_color='black',
         command=remove_data
     )
-    B3.place(x=650,y=350)
+    B3.place(x=650,y=470)
 
     # looping Tkiniter window
     subtk.mainloop()

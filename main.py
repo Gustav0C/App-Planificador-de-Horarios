@@ -7,14 +7,14 @@ sys.path.insert(0, 'windows/')
 from windows import timetable_stud
 from windows import timetable_fac
 import sqlite3
-from PIL import Image, ImageTk
 
-#IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
+#IMPORTANTO EL CUSTOM TKINTER
 import customtkinter as ctk
 #ASIGNANDO VALORES GLOBALES AL CTK
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
 
+#ACCEDEMOS A LA BASE DE DATOS Y VERIFICAMOS EL USUARIO
 def challenge():
     conn = sqlite3.connect(r'files/timetable.db')
     user = str(combo1.get())
@@ -67,13 +67,15 @@ def challenge():
         else:
             messagebox.showerror('Bad Input', '¡Nombre de usuario INCORRECTA/CONTRASEÑA!')
 
+#CREANDO LA VENTANA PRINCIPAL
 m = ctk.CTk()
 m.geometry('400x430')
 m.maxsize(width=400, height=430)
-m.title('App v1.0')
+m.title('App v1.5')
 m.iconbitmap("files/images/favicon.ico")
 m.config(bg="SkyBlue2")
 
+#TITULO DE LA VENTANA
 ctk.CTkLabel(
     m,
     text='Planificador de Horarios',
@@ -81,6 +83,7 @@ ctk.CTkLabel(
     fg_color="SkyBlue2"
 ).pack(pady=20)
 
+#FRASE DE BIENVENIDA
 ctk.CTkLabel(
     m,
     text='Bienvenido!\nInicia Sesion para continuar',
@@ -88,6 +91,7 @@ ctk.CTkLabel(
     bg_color="SkyBlue2"
 ).pack(pady=10)
 
+# ENTRADA DE NOMBRE DE USUARIO
 ctk.CTkLabel(
     m,
     text='Nombre de Usuario',
@@ -102,7 +106,7 @@ id_entry = ctk.CTkEntry(
 )
 id_entry.pack()
 
-# Label5
+# ENTRADA DE CONTRASEÑA
 ctk.CTkLabel(
     m,
     text='Contraseña:',
@@ -110,7 +114,7 @@ ctk.CTkLabel(
     bg_color="SkyBlue2"
 ).pack()
 
-# toggles between show/hide password
+# FUNCION PARA MOSTRAR/OCULTAR LA CONTRASEÑA
 def show_passw():
     if passw_entry.cget("show") == "●":
         passw_entry.configure(show="")
@@ -119,14 +123,16 @@ def show_passw():
         passw_entry.configure(show="●")
         B1_show.configure(text='○')
 
-pass_entry_f = tk.Frame(bg="SkyBlue2")
+# 7
+pass_entry_f = tk.Frame(bg='SkyBlue2')
 pass_entry_f.pack()
-# Entry2
+
+# 
 passw_entry = ctk.CTkEntry(
     pass_entry_f,
     show="●",
     corner_radius=10,
-    bg_color="SkyBlue2"
+    bg_color='SkyBlue2'
 )
 passw_entry.pack(side=tk.LEFT,padx=(39, 10))
 
