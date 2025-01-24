@@ -23,17 +23,17 @@ subcode = subname = subtype = None
 
 # create treeview (call this function once)
 def create_treeview():
-    tree['columns'] = ('one', 'two', 'three','four')
+    tree['columns'] = ('one', 'two', 'three')
     tree.column("#0", width=0, stretch=tk.NO)
     tree.column("one", width=70, stretch=tk.NO)
     tree.column("two", width=300, stretch=tk.NO)
     tree.column("three", width=60, stretch=tk.NO)
-    tree.column("four", width=70, stretch=tk.NO)
+    #tree.column("four", width=70, stretch=tk.NO)
     tree.heading('#0', text="")
     tree.heading('one', text="Code")
     tree.heading('two', text="Name")
     tree.heading('three', text="Type")
-    tree.heading('four',text="Section")
+    #tree.heading('four',text="Section")
 
 
 # update treeview (call this function after each update)
@@ -246,6 +246,9 @@ if __name__ == "__main__":
     )
     R2.place(x=270, y=300)
     R2.select()
+
+    #NUEVA FUNCION
+    """
     # Label6
     tk.Label(
         subtk,
@@ -261,6 +264,7 @@ if __name__ == "__main__":
         width=120
     )
     section_entry.place(x=270, y=340)
+    #//
     # Recopilando datos de la hora de inicio del curso
     tk.Label(
         subtk,
@@ -310,6 +314,7 @@ if __name__ == "__main__":
         placeholder_text="MM"
     )
     f_minutos_entry.place(x=320, y=420)
+    """
 
     # Button1
     B1 = ctk.CTkButton(

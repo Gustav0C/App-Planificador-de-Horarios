@@ -1,7 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
 from tkinter import messagebox
-import ttkthemes
 import os, sys
 sys.path.insert(0, 'windows/')
 from windows import timetable_stud
@@ -47,7 +45,7 @@ def challenge():
         if len(cursor) == 0:
             messagebox.showwarning('Bad id', '¡NOMBRE DE USUARIO INCORRECTO!')
         elif passw_entry.get() != cursor[0][0]:
-            messagebox.showerror('Bad pass', '¡CONTRASEÑA INCORRECTA!')      
+            messagebox.showerror('Bad pass', '¡CONTRASEÑA INCORRECTA!')
         else:
             nw = tk.Tk()
             tk.Label(
@@ -91,7 +89,7 @@ ctk.CTkLabel(
     bg_color="SkyBlue2"
 ).pack(pady=10)
 
-# ENTRADA DE NOMBRE DE USUARIO
+# LABEL DE NOMBRE DE USUARIO
 ctk.CTkLabel(
     m,
     text='Nombre de Usuario',
@@ -99,6 +97,7 @@ ctk.CTkLabel(
     bg_color="SkyBlue2"
 ).pack()
 
+#ENTRADA DE NOMBRE DE USUARIO
 id_entry = ctk.CTkEntry(
     m,
     corner_radius=10,
@@ -106,7 +105,7 @@ id_entry = ctk.CTkEntry(
 )
 id_entry.pack()
 
-# ENTRADA DE CONTRASEÑA
+# LABEL DE CONTRASEÑA
 ctk.CTkLabel(
     m,
     text='Contraseña:',
@@ -127,7 +126,7 @@ def show_passw():
 pass_entry_f = tk.Frame(bg='SkyBlue2')
 pass_entry_f.pack()
 
-# 
+# ENTRADA DE LA CONTRASEÑA
 passw_entry = ctk.CTkEntry(
     pass_entry_f,
     show="●",
@@ -136,6 +135,7 @@ passw_entry = ctk.CTkEntry(
 )
 passw_entry.pack(side=tk.LEFT,padx=(39, 10))
 
+# BOTON PARA MOSTRAR/OCULTAR LA CONTRASEÑA
 B1_show = ctk.CTkButton(
     pass_entry_f,
     text='○',
@@ -147,6 +147,7 @@ B1_show = ctk.CTkButton(
 )
 B1_show.pack(side=tk.LEFT,)
 
+# COMBOBOX DE TIPO DE USUARIO ADMIN/PROFESOR/ESTUDIANTE
 combo1 = ctk.CTkComboBox(
     m,
     values=['Estudiante', 'Profesor', 'Admin'],
@@ -154,6 +155,7 @@ combo1 = ctk.CTkComboBox(
 )
 combo1.pack(pady=15)
 
+#BOTON PARA INICIAR SESION
 ctk.CTkButton(
     m,
     text='Iniciar Sesion',

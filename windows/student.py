@@ -3,6 +3,11 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import sys
+#IMPORTANTO EL CUSTOM TKINTER PARA LA INTERFAZ DE USUARIO
+import customtkinter as ctk
+#ASIGNANDO VALORES GLOBALES AL CTK
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
 
 fid = passw = conf_passw = name = roll = section = None
 
@@ -64,7 +69,7 @@ def parse_data():
         passw_entry.delete(0, tk.END)
         conf_passw_entry.delete(0, tk.END)
         return
-  
+
     conn.execute(f"REPLACE INTO STUDENT (SID, PASSW, NAME, ROLL, SECTION)\
         VALUES ('{fid}','{passw}','{name}', '{roll}', '{section}')")
     conn.commit()
@@ -171,56 +176,62 @@ if __name__ == "__main__":
     # TKinter Window
     subtk = tk.Tk()
     subtk.geometry('1000x470')
-    subtk.title('Add/Update Students')
+    subtk.title('Añadir/Actualizar Estudiantes')
+    subtk.config(bg='SkyBlue2')
 
     # Label1
     tk.Label(
         subtk,
-        text='List of Students',
-        font=('Arial', 20, 'bold')
+        text='Lista de Estudiantes',
+        font=('Arial', 20, 'bold'),
+        bg='SkyBlue2'
     ).place(x=620, y=50)
 
     # Label2
     tk.Label(
         subtk,
-        text='Add/Update Students',
-        font=('Arial', 20, 'bold')
+        text='Añadir/Actualizar Estudiantes',
+        font=('Arial', 20, 'bold'),
+        bg='SkyBlue2'
     ).place(x=110, y=50)
 
     # Label3
     tk.Label(
         subtk,
-        text='Add information in the following prompt!',
-        font=('Arial', 10, 'italic')
+        text='En este apartado podras añadir o actualizar un estudiante',
+        font=('Arial', 10, 'italic'),
+        bg='SkyBlue2'
     ).place(x=110, y=85)
 
     # Label4
     tk.Label(
         subtk,
-        text='Student id:',
-        font=('Arial', 12)
+        text='ID Estudiante:',
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=130)
 
     # Entry1
-    fid_entry = tk.Entry(
+    fid_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=20
+        width=60
     )
     fid_entry.place(x=260, y=130)
 
     # Label5
     tk.Label(
         subtk,
-        text='Password:',
-        font=('Arial', 12)
+        text='Contraseña:',
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=170)
 
     # Entry2
-    passw_entry = tk.Entry(
+    passw_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=20,
+        width=160,
         show="●"
     )
     passw_entry.place(x=260, y=170)
@@ -236,15 +247,16 @@ if __name__ == "__main__":
     # Label6
     tk.Label(
         subtk,
-        text='Confirm Password:',
-        font=('Arial', 12)
+        text='Confirmar Contraseña:',
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=210)
 
     # Entry3
-    conf_passw_entry = tk.Entry(
+    conf_passw_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=20,
+        width=160,
         show="●"
     )
     conf_passw_entry.place(x=260, y=210)
@@ -252,15 +264,16 @@ if __name__ == "__main__":
     # Label7
     tk.Label(
         subtk,
-        text='Student Name:',
-        font=('Arial', 12)
+        text='Nombre:',
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=250)
 
     # Entry4
-    name_entry = tk.Entry(
+    name_entry = ctk.CTkEntry(
         subtk,
         font=('Arail', 12),
-        width=25,
+        width=200,
     )
     name_entry.place(x=260, y=250)
 
@@ -268,7 +281,8 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Roll no.:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=290)
 
     # Entry5
@@ -283,7 +297,8 @@ if __name__ == "__main__":
     tk.Label(
         subtk,
         text='Seccion:',
-        font=('Arial', 12)
+        font=('Arial', 12),
+        bg='SkyBlue2'
     ).place(x=100, y=330)
 
     # Entry6
@@ -295,20 +310,22 @@ if __name__ == "__main__":
     sec_entry.place(x=260, y=330)
 
     # Button1
-    B1 = tk.Button(
+    B1 = ctk.CTkButton(
         subtk,
         text='Añadir Estudiante',
         font=('Arial', 12),
-        command=parse_data
+        command=parse_data,
+        text_color='black'
     )
     B1.place(x=150,y=400)
 
     # Button2
-    B2 = tk.Button(
+    B2 = ctk.CTkButton(
         subtk,
         text='Actualizar Estudiante',
         font=('Arial', 12),
-        command=update_data
+        command=update_data,
+        text_color='black'
     )
     B2.place(x=410,y=400)
 
@@ -318,11 +335,12 @@ if __name__ == "__main__":
     update_treeview()
 
     # Button3
-    B3 = tk.Button(
+    B3 = ctk.CTkButton(
         subtk,
         text='Delete Student(s)',
         font=('Arial', 12),
-        command=remove_data
+        command=remove_data,
+        text_color='black'
     )
     B3.place(x=650,y=400)
 
