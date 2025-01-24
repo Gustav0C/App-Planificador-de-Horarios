@@ -132,18 +132,12 @@ def remove_data():
 
 # toggles between show/hide password
 def show_passw():
-    if passw_entry['show'] == "●":
-        passw_entry['show'] = ""
-        B1_show['text'] = '●'
-        B1_show.update()
-    elif passw_entry['show'] == "":
-        passw_entry['show'] = "●"
-        B1_show['text'] = '○'
-        B1_show.update()
-    passw_entry.update()
-
-
-
+    if passw_entry.cget("show") == "●":
+        passw_entry.configure(show="")
+        B1_show.configure(text="●")
+    else:
+        passw_entry.configure(show="●")
+        B1_show.configure(text="○")
 
 # main
 if __name__ == "__main__":  
@@ -236,13 +230,16 @@ if __name__ == "__main__":
     )
     passw_entry.place(x=260, y=170)
 
-    B1_show = tk.Button(
+    B1_show = ctk.CTkButton(
         subtk,
-        text='○',
+        text="○",
         font=('Arial', 9, 'bold'),
-        command=show_passw
+        command=show_passw,
+        width=25,  # Ancho del botón
+        height=25,  # Alto del botón
+        corner_radius=10
     )
-    B1_show.place(x=460,y=170)
+    B1_show.place(x=430, y=170)
 
     # Label6
     tk.Label(
@@ -286,10 +283,10 @@ if __name__ == "__main__":
     ).place(x=100, y=290)
 
     # Entry5
-    roll_entry = tk.Entry(
+    roll_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=5,
+        width=40,
     )
     roll_entry.place(x=260, y=290)
 
@@ -302,10 +299,10 @@ if __name__ == "__main__":
     ).place(x=100, y=330)
 
     # Entry6
-    sec_entry = tk.Entry(
+    sec_entry = ctk.CTkEntry(
         subtk,
         font=('Arial', 12),
-        width=5,
+        width=40,
     )
     sec_entry.place(x=260, y=330)
 

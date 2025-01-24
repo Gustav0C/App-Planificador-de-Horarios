@@ -15,7 +15,7 @@ fini = None
 butt_grid = []
 
 period_names =['7:45-8:30', '8:30-9:15', '9:15-10:00', '10:00-10:45', '10:45-11:30','11:30-12:15','12:15-1:00','1:00-1:45']
-day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday']
+day_names = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
 
 def select_fac():
     global fini
@@ -45,11 +45,11 @@ def update_table(fini):
 
                 sec_li = [x[0] for x in cursor]
                 t = ', '.join(sec_li)
-                butt_grid[i][j]['text'] = "Sections: " + t
+                butt_grid[i][j]['text'] = "Sección: " + t
                 print(i, j, cursor[0][0])
             else:
                 butt_grid[i][j]['fg'] = 'black'
-                butt_grid[i][j]['text'] = "No Class"
+                butt_grid[i][j]['text'] = "Sin curso"
                 butt_grid[i][j].update()
 
 def process_button(d, p):
@@ -70,7 +70,7 @@ def process_button(d, p):
         subtype = str(cur1[0][1])
 
         if subtype == 'T':
-            subtype = 'Theory'
+            subtype = 'Teoria'
         elif subtype == 'P':
             subtype = 'Practical'
 
@@ -78,14 +78,14 @@ def process_button(d, p):
     else:
         sec_li = subcode = subname = subtype = t = 'None'
 
-    tk.Label(details, text='Class Details', font=('Consolas', 15, 'bold')).pack(pady=15)
-    tk.Label(details, text='Day: '+day_names[d], font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Period: '+str(p+1), font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Subject Code: '+subcode, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Subect Name: '+subname, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Subject Type: '+subtype, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Faculty Initials: '+fini, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Sections: '+t, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Detalles del Curso', font=('Consolas', 15, 'bold')).pack(pady=15)
+    tk.Label(details, text='Día: '+day_names[d], font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Periodo: '+str(p+1), font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='ID: '+subcode, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Nombre: '+subname, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Tipo: '+subtype, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Inicial del Docente: '+fini, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Secciones: '+t, font=('Consolas'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
 
     tk.Button(
         details,
@@ -100,7 +100,7 @@ def process_button(d, p):
 def fac_tt_frame(tt, f):
     title_lab = tk.Label(
         tt,
-        text='T  I  M  E  T  A  B  L  E',
+        text='H  O  R  A  R  I  O',
         font=('Arial', 20, 'bold'),
         pady=5
     )
@@ -110,13 +110,13 @@ def fac_tt_frame(tt, f):
     legend_f.pack(pady=15)
     tk.Label(
         legend_f,
-        text='Legend: ',
+        text='Leyenda: ',
         font=('Arial', 10, 'italic')
     ).pack(side=tk.LEFT)
 
     tk.Label(
         legend_f,
-        text='Theory Classes',
+        text='Clases teóricas',
         bg='green',
         fg='white',
         relief='raised',
@@ -126,7 +126,7 @@ def fac_tt_frame(tt, f):
 
     tk.Label(
         legend_f,
-        text='Practical Classes',
+        text='Clases Prácticas',
         bg='blue',
         fg='white',
         relief='raised',
@@ -220,7 +220,7 @@ if __name__ == "__main__":
 
     tk.Label(
         fac_select_f,
-        text='Select Faculty:  ',
+        text='Selecciona Profesor:  ',
         font=('Arial', 12, 'bold')
     ).pack(side=tk.LEFT)
 

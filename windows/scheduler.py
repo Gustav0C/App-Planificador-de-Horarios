@@ -16,7 +16,7 @@ section = None
 butt_grid = []
 
 period_names =['7:45-8:30', '8:30-9:15', '9:15-10:00', '10:00-10:45', '10:45-11:30','11:30-12:15','12:15-1:00','1:00-1:45']
-day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday']
+day_names = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
 
 def update_p(d, p, tree, parent):
     # print(section, d, p, str(sub.get()))
@@ -60,19 +60,19 @@ def process_button(d, p):
     # Label10
     tk.Label(
         add_p,
-        text='Select Subject',
+        text='Selecciona el Curso',
         font=('Arial', 12, 'bold')
     ).pack()
 
     tk.Label(
         add_p,
-        text=f'Day: {day_names[d]}',
+        text=f'Día: {day_names[d]}',
         font=('Arial', 12)
     ).pack()
 
     tk.Label(
         add_p,
-        text=f'Period: {p+1}',
+        text=f'Periodo: {p+1}',
         font=('Arial', 12)
     ).pack()
 
@@ -82,8 +82,8 @@ def process_button(d, p):
     tree.column("one", width=70, stretch=tk.NO)
     tree.column("two", width=80, stretch=tk.NO)
     tree.heading('#0', text="")
-    tree.heading('one', text="Faculty")
-    tree.heading('two', text="Subject Code")
+    tree.heading('one', text="Profesor")
+    tree.heading('two', text="Curso ID")
     
     cursor = conn.execute("SELECT FACULTY.INI, FACULTY.SUBCODE1, FACULTY.SUBCODE2, SUBJECTS.SUBCODE\
     FROM FACULTY, SUBJECTS\
@@ -123,9 +123,10 @@ def update_table():
             if len(cursor) != 0:
                 butt_grid[i][j]['text'] = str(cursor[0][0]) + '\n' + str(cursor[0][1])
                 butt_grid[i][j].update()
+                butt_grid[i][j]['bg']='Green'
                 print(i, j, cursor[0][0])
             else:
-                butt_grid[i][j]['text'] = "No Class"
+                butt_grid[i][j]['text'] = "Sin Curso"
                 butt_grid[i][j].update()
             
 #CONECTANDO A LA BASE DE DATOS

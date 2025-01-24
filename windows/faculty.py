@@ -100,8 +100,8 @@ def update_data():
     name_entry.delete(0, tk.END)
     ini_entry.delete(0, tk.END)
     email_entry.delete(0, tk.END)
-    combo1.current(0)
-    combo2.current(0)
+    combo1.set(0)
+    combo2.set(0)
     try:
         # print(tree.selection())
         if len(tree.selection()) > 1:

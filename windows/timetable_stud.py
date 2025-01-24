@@ -48,7 +48,7 @@ def update_table(sec):
                 print(i, j, cursor[0][0])
             else:
                 butt_grid[i][j]['fg'] = 'black'
-                butt_grid[i][j]['text'] = "No Class"
+                butt_grid[i][j]['text'] = "Sin Curso"
                 butt_grid[i][j].update()
 
 def process_button(d, p, sec):
@@ -81,15 +81,15 @@ def process_button(d, p, sec):
         subcode = fini = subname = subtype = fname = femail = 'None'
 
     print(subcode, fini, subname, subtype, fname, femail)
-    tk.Label(details, text='Class Details', font=('Arial', 15, 'bold')).pack(pady=15)
-    tk.Label(details, text='Day: '+day_names[d], font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Period: '+str(p+1), font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Subject Code: '+subcode, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Subect Name: '+subname, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Subject Type: '+subtype, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Faculty Initials: '+fini, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Faculty Name: '+fname, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
-    tk.Label(details, text='Faculty Email: '+femail, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Detalles del Curso', font=('Arial', 15, 'bold')).pack(pady=15)
+    tk.Label(details, text='Día: '+day_names[d], font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Periodo: '+str(p+1), font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='ID: '+subcode, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Nombre: '+subname, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Tipo: '+subtype, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Iniciales: '+fini, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Nombre del Profesor: '+fname, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
+    tk.Label(details, text='Correo del Profesor: '+femail, font=('Arial'), anchor="w").pack(expand=1, fill=tk.X, padx=20)
 
     tk.Button(
         details,
@@ -195,7 +195,7 @@ def student_tt_frame(tt, sec):
                 bb.grid(row=i+1, column=j)
 
             bb.config(
-                text='None!',
+                text='None',
                 font=('Arial', 10),
                 width=13,
                 height=3,
@@ -229,7 +229,7 @@ if __name__ == "__main__":
 
     tk.Label(
         sec_select_f,
-        text='Select section:  ',
+        text='Selecciona la Sección:  ',
         font=('Arial', 12, 'bold'),
         bg="SkyBlue2"
     ).pack(side=tk.LEFT)

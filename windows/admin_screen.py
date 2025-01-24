@@ -1,3 +1,4 @@
+# IMPORTANTO LIBRERIAS NECESARIAS
 import tkinter as tk
 import sys
 import os
@@ -14,10 +15,14 @@ def run_tt_f(): os.system('pythonw windows\\timetable_fac.py')
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
 
+# VENTANA PRINCIPAL
 ad = tk.Tk()
-ad.geometry('500x430')
+ad.geometry('500x420')
 ad.title('Administrador')
 ad.config(bg="SkyBlue2")
+ad.maxsize(width=500, height=430)
+
+# lABEL DE ADMINISTRADOR 
 tk.Label(
     ad,
     text='A D M I N I S T R A D O R',
@@ -36,6 +41,7 @@ tk.Label(
 modify_frame = tk.LabelFrame(text='Modificar', font=('Arial'), padx=20,bg="SkyBlue2", fg="blue")
 modify_frame.place(x=50, y=100)
 
+# BOTON PARA MODIFICAR CURSOS
 ctk.CTkButton(
     modify_frame,
     text='Cursos',
@@ -45,6 +51,7 @@ ctk.CTkButton(
     width=120
 ).pack(pady=20)
 
+# BOTON PARA MODIFICAR PROFESORES
 ctk.CTkButton(
     modify_frame,
     text='Profesor',
@@ -54,6 +61,7 @@ ctk.CTkButton(
     width=120
 ).pack(pady=20)
 
+# BOTON PARA MODIFICAR ESTUDIANTES
 ctk.CTkButton(
     modify_frame,
     text='Estudiantes',
@@ -66,6 +74,7 @@ ctk.CTkButton(
 tt_frame = tk.LabelFrame(text='Horario', font=('Arial'), padx=20, bg="SkyBlue2",fg="blue")
 tt_frame.place(x=250, y=100)
 
+# BOTON PARA VER EL HORARIO GENERAL
 ctk.CTkButton(
     tt_frame,
     text='Horario General',
@@ -75,6 +84,7 @@ ctk.CTkButton(
     width=120
 ).pack(pady=20)
 
+# VER EL HORARIO POR SECCIONES
 ctk.CTkButton(
     tt_frame,
     text='Ver por Secciones',
@@ -84,6 +94,7 @@ ctk.CTkButton(
     width=120
 ).pack(pady=20)
 
+# VER EL HORARIO POR PROFESORES
 ctk.CTkButton(
     tt_frame,
     text='Ver por Profesores',
@@ -93,7 +104,7 @@ ctk.CTkButton(
     width=120
 ).pack(pady=20)
 
-
+# BOTON PARA SALIR DEL ADMIN SCREEN
 ctk.CTkButton(
     ad,
     text='Salir',
